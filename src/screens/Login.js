@@ -42,7 +42,7 @@ const Login = (props) => {
       
       <View style={globalStyles.headerLogin}>
         <Text style={globalStyles.headerLogin}> Satisfying.you </Text>
-        <Icon name="mood" size={40} color="white" />
+        <Icon style={globalStyles.headerImg} name="mood" size={45} color="white" />
       </View>
 
       <View style={globalStyles.area}>

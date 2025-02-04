@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { shadow } from 'react-native-paper';
 import {grey100} from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 export const colors = {
@@ -54,41 +55,41 @@ const globalStyles = StyleSheet.create({
   },
 
   headerLogin: {
-    justifyContent:'flex-start',
     flexDirection: 'row',
-    fontSize: 30,
-    fontFamily: fonts.bold,
+    fontSize: 40,
+    fontFamily: fonts.regular,
     color: colors.text,
     marginBottom: spacing.large,
   },
 
   headerImg: {
-    marginLeft: 14,
-    color: colors.goBackBlue,
+    marginTop:6,
   },
 
   label: {
     justifyContent: 'flex-start',
     fontSize: 18,
+   // backgroundColor:'blue',
     color: colors.text,
     fontFamily: fonts.regular,
   },
 
   inputs: {
-    width: '93%',
+    borderBottomColor: 'black',
     color: colors.azul,
     backgroundColor: colors.text,
     fontFamily: fonts.regular,
     borderRadius: 1,
     height: 35,
+   // backgroundColor:'green',
     paddingHorizontal: 15,
     paddingVertical: 0,
   },
 
   area: {
-    marginLeft: 18,
-    //backgroundColor:'red',
-    width: '100%',
+   
+   // backgroundColor:'red',
+    width: '93%',
     paddingHorizontal: spacing.medium,
     marginBottom: spacing.medium,
   },
