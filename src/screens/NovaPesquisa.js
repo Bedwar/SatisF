@@ -1,8 +1,11 @@
+
+import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
+import DatePicker from 'react-native-date-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import globalStyles from '../styles/globalStyles';
 
 
@@ -31,7 +34,7 @@ export default function NovaPesquisa(props) {
     }
   };
 
-  const handleImagePicker = () => {
+ const handleImagePicker = () => {
     Alert.alert(
       'Selecione',
       'Informe de onde voce quer pegar a foto',
@@ -51,25 +54,30 @@ export default function NovaPesquisa(props) {
         cancelable: true,
       },
     );
-  };
+  }; 
 
- 
+   const pickImageFromGalery = async () => {
+    const result = await launchImageLibrary((options = {mediaType: 'photo'}));
+    const assets = result?.assets[0];
+    setImage(assets?.uri);
+  }; 
+
  
 
   return (
-    <View style={newSearchStyles.container}>
-      <View style={newSearchStyles.header}>
+    <View style={globalStyles.container}>
+      <View style={globalStyles.header}>
         <TouchableOpacity onPress={() => props.navigation.pop()}>
-          <Icon name="arrow-back" size={30} style={newSearchStyles.headerImg} />
+          <Icon name="arrow-back" size={30} style={globalStyles.headerImg} />
         </TouchableOpacity>
-        <Text style={newSearchStyles.title}>Nova pesquisa</Text>
+        <Text style={globalStyles.header}>Nova pesquisa</Text>
       </View>
 
-      <View style={newSearchStyles.content}>
-        <View style={newSearchStyles.inputWrapper}>
-          <Text style={newSearchStyles.label}>Nome</Text>
+      <View style={globalStyles.area}>
+        <View style={globalStyles.inputWrapper}>
+          <Text style={globalStyles.label}>Nome</Text>
           <TextInput
-            style={newSearchStyles.input}
+            style={globalStyles.input}
             placeholder="Preencha o nome da pesquisa"
             value={nomePesquisa}
             onChangeText={setNomePesquisa}
@@ -79,8 +87,8 @@ export default function NovaPesquisa(props) {
           ) : null}
         </View>
 
-        <View style={newSearchStyles.inputWrapper}>
-          <Text style={newSearchStyles.label}>Data</Text>
+        <View style={globalStyles.inputWrapper}>
+          <Text style={globalStyles.label}>Data</Text>
           <TextInput
             value={format(date, 'dd/MM/yyyy')}
             inlineImageLeft="calendar-month"
@@ -89,7 +97,7 @@ export default function NovaPesquisa(props) {
                 icon="calendar-month"
                 size={35}
                 color={'#00000077'}
-                style={newSearchStyles.dateIcon}
+                style={globalStyles.dateIcon}
                 onPress={() => setOpen(true)}
               />
             }
@@ -116,18 +124,18 @@ export default function NovaPesquisa(props) {
           ) : null}
         </View>
 
-        <View style={newSearchStyles.inputWrapper}>
-          <Text style={newSearchStyles.label}>Imagem</Text>
+        <View style={globalStyles.inputWrapper}>
+          <Text style={globalStyles.label}>Imagem</Text>
           <TouchableOpacity
-            style={newSearchStyles.imageTouchable}
+            style={globalStyles.imageTouchable}
             onPress={handleImagePicker}>
             {image ? (
               <Image
                 source={{uri: image}}
-                style={newSearchStyles.pickedImage}
+                style={globalStyles.pickedImage}
               />
             ) : (
-              <Text style={newSearchStyles.imageButtonText}>
+              <Text style={globalStyles.label}>
                 Câmera/Galeria de imagens
               </Text>
             )}
@@ -139,9 +147,9 @@ export default function NovaPesquisa(props) {
         </View>
       </View>
 
-      <View style={newSearchStyles.btnContainer}>
+      <View style={globalStyles.areaButtons}>
         <TouchableOpacity
-          style={globalStyles.button}
+          style={globalStyles.buttonVerde}
           onPress={() =>
             handleCadastroPesquisa(nomePesquisa, format(date, 'dd/MM/yyyy'))
           }>
@@ -151,5 +159,3 @@ export default function NovaPesquisa(props) {
     </View>
   );
 }
-
-// export default NovaPesquisa;

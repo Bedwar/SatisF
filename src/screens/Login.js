@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
+import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -37,13 +38,15 @@ const Login = (props) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={globalStyles.container}>
+    <ScrollView contentContainerStyle={globalStyles.containerLogin}>
       
       
-      <View style={globalStyles.headerLogin}>
+       
+      <View style={globalStyles.headerLogin }>
         <Text style={globalStyles.headerLogin}> Satisfying.you </Text>
-        <Icon style={globalStyles.headerImg} name="mood" size={45} color="white" />
+        <Icon name="mood" size={45} style={{color: 'white'}} />
       </View>
+
 
       <View style={globalStyles.area}>
         <Text style={globalStyles.label}>E-mail</Text>
@@ -55,9 +58,7 @@ const Login = (props) => {
 
 
         />
-      </View>
-
-      <View style={globalStyles.area}>
+   
         <Text style={globalStyles.label}>Senha</Text>
         <TextInput
           style={globalStyles.inputs}
@@ -68,23 +69,24 @@ const Login = (props) => {
 
         />
         {errorMessage ? <Text style={globalStyles.errorText}>{errorMessage}</Text> : null}
-      </View>
+      
+        <TouchableOpacity style={globalStyles.buttonVerde} onPress={() => showHome(email, password)}>
+          <Text style={globalStyles.buttonText}>Entrar</Text>
+        </TouchableOpacity>
+        
+        </View>
+
 
       
+        <View style={globalStyles.areaButtons}>
+          <TouchableOpacity style={globalStyles.buttonAzul} onPress={showNovaConta}>
+            <Text style={globalStyles.buttonText}>Criar nova conta</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity style={globalStyles.button} onPress={() => showHome(email, password)}>
-        <Text style={globalStyles.buttonText}>Entrar</Text>
-      </TouchableOpacity>
-
-     
-        <TouchableOpacity style={globalStyles.buttonNc} onPress={showNovaConta}>
-          <Text style={globalStyles.buttonText}>Criar nova conta</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={globalStyles.buttonRs} onPress={showRecuperarSenha}>
-          <Text style={globalStyles.buttonText}>Esqueci a senha</Text>
-        </TouchableOpacity>
-      
+          <TouchableOpacity style={globalStyles.buttonCinza} onPress={showRecuperarSenha}>
+            <Text style={globalStyles.buttonText}>Esqueci a senha</Text>
+          </TouchableOpacity>
+        </View>
     </ScrollView>
   );
 };

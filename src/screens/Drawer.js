@@ -18,7 +18,7 @@ const Drawer = (props) => {
         headerTintColor: '#fff',
         headerTitle: '',
         drawerLabelStyle: {
-          fontSize: 50,
+          fontSize: 80,
           color: 'white',
           fontFamily: 'AveriaLibre-Regular',
         },
@@ -32,9 +32,9 @@ const Drawer = (props) => {
             style={{
               alignItems: 'center',
               marginBottom: 5,
-              backgroundColor: 'darkslateblue',
-              height: 60,
-              paddingHorizontal: 20,
+              backgroundColor: '#2B1D62',
+              height: 75,
+              paddingHorizontal: 40,
             }}
           />
         ),

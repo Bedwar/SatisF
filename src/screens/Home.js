@@ -3,6 +3,7 @@ import { ScrollView, Text, TouchableOpacity, View, Image } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import CardPesquisa from '../componentes/CardPesquisa';
 import globalStyles from '../styles/globalStyles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Home = (props) => {
 
@@ -16,33 +17,33 @@ const Home = (props) => {
 
   const showNovaPesquisa = () => {
     props.navigation.navigate('NovaPesquisa');
-  };
+  }; 
 
-  const showAcoesPesquisa = research => {
+ /*  const showAcoesPesquisa = research => {
     props.navigation.navigate('AcoesPesquisa', {research: research});
   };
-
+ */
   return (
     <View style={globalStyles.container}>
-      <View
-        style={{...globalStyles.header, ...{backgroundColor: 'transparent'}}}>
+     
+    
+     <View style={globalStyles.areaButtons}>
+    
         <TextInput
-          style={globalStyles.searchBar}
-          left={<TextInput.Icon icon="magnify" />}
+          style={globalStyles.inputs}
           placeholder="Insira o termo de busca..."
+          left={ <TextInput.Icon  color='grey'size={40}icon="magnify" />}
+
         />
-
-        <TouchableOpacity style={globalStyles.searchButton}></TouchableOpacity>
-      </View>
-
-      <ScrollView
-        horizontal={true}
-        style={[{marginTop: 58}]}>
+     </View>
+    
+      <ScrollView 
+        horizontal={true}>
         {researchData.map((research, index) => {
           return (
-            <TouchableOpacity
+            <TouchableOpacity  style={globalStyles.researchCard}
               key={index}
-              style={globalStyles.researchCard}
+             
               onPress={() => {
                 showAcoesPesquisa(research);
               }}>
@@ -51,10 +52,13 @@ const Home = (props) => {
           );
         })}
       </ScrollView>
-
-      <TouchableOpacity style={globalStyles.button} onPress={showNovaPesquisa}>
+     
+      <View style={globalStyles.areaButtons}>
+      <TouchableOpacity style={globalStyles.buttonVerde} onPress={showNovaPesquisa}>
         <Text style={globalStyles.buttonText}>NOVA PESQUISA</Text>
       </TouchableOpacity>
+      </View>
+
     </View>
   );
 };

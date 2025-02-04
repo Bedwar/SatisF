@@ -34,12 +34,12 @@ const NovaConta = props => {
   };
 
   return (
-    <View style={newAccStyles.container}>
-      <View style={newAccStyles.header}>
+    <View style={globalStyles.container}>
+      <View style={globalStyles.header}>
         <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
-          <Icon name="arrow-back" size={30} style={newAccStyles.headerImg} />
+          <Icon name="arrow-back" size={37} style={globalStyles.headerImg} />
         </TouchableOpacity>
-        <Text style={newAccStyles.header}>Nova Conta</Text>
+        <Text style={globalStyles.header}>Nova Conta</Text>
       </View>
 
       <View style={globalStyles.area}>
@@ -73,13 +73,15 @@ const NovaConta = props => {
           <Text style={globalStyles.sucessoMessage}>{sucessoMessage}</Text>
         ) : null}
       </View>
+      <View style={globalStyles.areaButtons}>
       <TouchableOpacity
-        style={globalStyles.button}
+        style={globalStyles.buttonVerde}
         onPress={() => {
           handleRegister(email, password, repeatPassword);
         }}>
         <Text style={globalStyles.buttonText}>CADASTRAR</Text>
       </TouchableOpacity>
+      </View>
     </View>
   );
 };

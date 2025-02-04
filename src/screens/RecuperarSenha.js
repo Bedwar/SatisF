@@ -24,13 +24,13 @@ const RecuperarSenha = (props) => {
   };
 
   return (
-    <View style={recSenhaStyles.container}>
+    <View style={globalStyles.container}>
 
-      <View style={recSenhaStyles.header}>
+      <View style={globalStyles.header}>
         <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
-          <Icon name="arrow-back" size={40} color="lightblue" />
+          <Icon name="arrow-back" size={35} style={globalStyles.headerImg} />
         </TouchableOpacity>
-        <Text style={recSenhaStyles.header}>Recuperação de senha</Text>
+        <Text style={globalStyles.header}>Recuperação de senha</Text>
       </View>
 
       <View style={globalStyles.area}>
@@ -45,13 +45,14 @@ const RecuperarSenha = (props) => {
         {sucessoMessage ? <Text style={globalStyles.sucessoMessage}>{sucessoMessage}</Text> : null}
        
       </View >
+      <View style={globalStyles.areaButtons}>
       <TouchableOpacity
-          style={globalStyles.button}
+          style={globalStyles.buttonVerde}
           onPress={() => handleRecoverPassword(email)}
         >
           <Text style={globalStyles.buttonText}>RECUPERAR</Text>
         </TouchableOpacity>
-
+  </View>
     </View>
   );
 };
