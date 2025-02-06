@@ -40,47 +40,44 @@ const Drawer = (props) => {
         ),
       }}
       drawerContent={props => (
-        <DrawerContentScrollView {...props}>
-          <View style={globalStyles.emailContainer}>
-            <Text style={globalStyles.emailText}>{'usuario@dominio.com'}</Text>
-          </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{flex: 1, padding: 20, width: '100%'}}>
+            <Text style={{ color: "white", fontSize: 18, fontWeight: "bold", marginBottom: 20 }}>{'usuario@dominio.com'}</Text>
 
-          <View style={globalStyles.separator}></View>
+            <View style={{ height: 1, backgroundColor: "white", marginBottom: 20 }} />
 
-          <View style={globalStyles.drawerContainer}>
-            <DrawerItem
-              icon={({focused, color, size}) => (
+
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginBottom: 20,
+              }}
+              onPress={() => props.navigation.goBack()}>
                 <Icon
                   name="description"
-                  size={size}
-                  color={focused ? '#7cc' : '#ccc'}
-                />
-              )}
-              labelStyle={globalStyles.label}
-              label="Pesquisas"
-              onPress={() => {
-                props.navigation.goBack();
-              }}
-              style={{}}
-            />
+                  color={'white'}
+                  size={20}
+                />              
+                <Text style={{color: 'white', fontSize: 16, marginLeft: 10}}>
+                Pesquisas
+              </Text>
+            </TouchableOpacity>
 
-            <DrawerItem
-              style={{marginBottom: 50}}
-              icon={({focused, color, size}) => (
-                <Icon
-                  name="login"
-                  size={size}
-                  color={focused ? '#7cc' : '#ccc'}
-                />
-              )}
-              labelStyle={globalStyles.label}
-              label="Sair"
-              onPress={() => {
-                props.navigation.popToTop();
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 'auto',
               }}
-            />
+              onPress={() => alert('Sair')}>
+              <Icon name="login" size={20} color="white" />
+              <Text style={{color: 'white', fontSize: 16, marginLeft: 10}}>
+                Sair
+              </Text>
+            </TouchableOpacity>
           </View>
-        </DrawerContentScrollView>
+        </View>
       )}>
       <DrawerNavigator.Screen name="Pesquisas" component={Home} />
     </DrawerNavigator.Navigator>
