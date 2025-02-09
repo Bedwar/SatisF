@@ -4,6 +4,7 @@ import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
 
+
 const parseDate = (dateString) => {
   const [day, month, year] = dateString.split('/').map(Number);
   return new Date(year, month - 1, day);

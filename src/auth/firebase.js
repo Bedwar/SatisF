@@ -16,3 +16,4 @@ const app = initializeApp(firebaseConfig);
 const auth_mod = getAuth(app);
 
 export default auth_mod;
+export { app };

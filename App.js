@@ -16,6 +16,8 @@ import Relatorio from './src/screens/Relatorio';
 const Stack = createStackNavigator();
 
 const App = () => {
+
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false, headerBackVisible: false }}>
