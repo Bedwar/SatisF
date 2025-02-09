@@ -3,13 +3,12 @@ import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-na
 import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
-import { format } from 'date-fns';
+import { format, set } from 'date-fns';
 import DatePicker from 'react-native-date-picker';
 import { Modal } from 'react-native-paper';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import { initializeFirestore, collection, updateDoc, doc } from 'firebase/firestore';
+import { initializeFirestore, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { app } from '../auth/firebase';
-
 
 const parseDate = (dateString) => {
   const [day, month, year] = dateString.split('/').map(Number);
@@ -29,23 +28,46 @@ const ModificarPesquisa = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState(research.image || null);
 
-  const db = initializeFirestore(app, {experimentalForceLongPolling: true});
-  
+  const db = initializeFirestore(app, { experimentalForceLongPolling: true });
 
-  const handleModificarPesquisa = (nome, data) => {
+  const handleModificarPesquisa = (nome, data, image) => {
     setErrorNome('');
     setErrorData('');
     setSucessoMessage('');
+
     if (nome !== '' && data !== '') {
-      setSucessoMessage('Nova pesquisa registrada!');
+      const serchRef = doc(db, 'pesquisas', research.id);
+      updateDoc(serchRef, {
+        title: nome,
+        date: data,
+      })
+        .then(() => {
+          setSucessoMessage('Pesquisa modificada com sucesso');
+        })
+        .catch((error) => {
+          console.error('Error updating document: ', error);
+        });
     } else {
-      if (nome == '') {
+      if (nome === '') {
         setErrorNome('Preencha o nome da pesquisa');
       }
-      if (data == '') {
+      if (data === '') {
         setErrorData('Preencha a data');
       }
     }
+  };
+
+  const handleSearchDelete = () => {
+    const serchRef = doc(db, 'pesquisas', research.id);
+    deleteDoc(serchRef)
+      .then(() => {
+        console.log('Document successfully deleted!');
+      })
+      .catch((error) => {
+        console.error('Error removing document: ', error);
+      });
+
+    setModalVisible(false);
   };
 
   const handleImagePicker = () => {
@@ -64,33 +86,27 @@ const ModificarPesquisa = (props) => {
           style: 'default',
         },
       ],
-      {
-        cancelable: true,
-      },
+      { cancelable: true },
     );
   };
 
   const pickImageFromGalery = async () => {
-    const result = await launchImageLibrary((options = {mediaType: 'photo'}));
+    const result = await launchImageLibrary((options = { mediaType: 'photo' }));
     const assets = result?.assets[0];
     setImage(assets?.uri);
   };
 
   const pickImageFromCamera = async () => {
-    const result = await launchCamera((options = {mediaType: 'photo'}));
+    const result = await launchCamera((options = { mediaType: 'photo' }));
     const assets = result?.assets[0];
     setImage(assets?.uri);
   };
 
   return (
-    <View style={globalStyles.container}>
+    <View style={globalStyles.crudContainer}>
       <View style={globalStyles.header}>
         <TouchableOpacity onPress={() => props.navigation.pop()}>
-          <Icon
-            name="arrow-back"
-            size={30}
-            style={globalStyles.headerImg}
-          />
+          <Icon name="arrow-back" size={30} style={globalStyles.headerImg} />
         </TouchableOpacity>
         <Text style={globalStyles.title}>Modificar pesquisa</Text>
       </View>
@@ -99,7 +115,6 @@ const ModificarPesquisa = (props) => {
         <View style={globalStyles.inputWrapper}>
           <Text style={globalStyles.label}>Nome</Text>
           <TextInput
-            // style={globalStyles.input}
             placeholder="Preencha o nome da pesquisa"
             value={nomePesquisa}
             onChangeText={setNomePesquisa}
@@ -112,7 +127,7 @@ const ModificarPesquisa = (props) => {
         <View style={globalStyles.inputWrapper}>
           <Text style={globalStyles.label}>Data</Text>
           <TextInput
-            value={format(date, 'dd/MM/yyyy')}
+            value={date ? format(date, 'dd/MM/yyyy') : ''}
             right={
               <TextInput.Icon
                 icon="calendar-month"
@@ -131,7 +146,7 @@ const ModificarPesquisa = (props) => {
             mode="date"
             open={open}
             date={date}
-            onConfirm={date => {
+            onConfirm={(date) => {
               setOpen(false);
               setDate(date);
             }}
@@ -148,16 +163,16 @@ const ModificarPesquisa = (props) => {
           <Text style={globalStyles.label}>Imagem</Text>
           <TouchableOpacity
             style={globalStyles.imageTouchable}
-            onPress={handleImagePicker}>
+            onPress={handleImagePicker}
+          >
             {image ? (
-              <Image source={image} style={globalStyles.pickedImage} />
+              <Image source={{ uri: image }} style={globalStyles.pickedImage} />
             ) : (
               <Text style={globalStyles.imageButtonText}>
                 Câmera/Galeria de imagens
               </Text>
             )}
           </TouchableOpacity>
-
           {sucessoMessage ? (
             <Text style={globalStyles.sucessoMessage}>{sucessoMessage}</Text>
           ) : null}
@@ -165,53 +180,53 @@ const ModificarPesquisa = (props) => {
       </View>
 
       <View style={[globalStyles.btnContainer]}>
-        
-            <TouchableOpacity style={globalStyles.button} onPress={() =>
-              handleModificarPesquisa(nomePesquisa, format(date, 'dd/MM/yyyy'))
-            }>
-        <Text style={globalStyles.buttonText}>SALVAR</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={globalStyles.button}
+          onPress={() =>
+            handleModificarPesquisa(nomePesquisa, format(date, 'dd/MM/yyyy', null))
+          }
+        >
+          <Text style={globalStyles.buttonText}>SALVAR</Text>
+        </TouchableOpacity>
         <Icon name="delete" size={40} color="white" />
-            <Text
-              style={{
-                color: 'white',
-                fontFamily: 'AveriaLibre-Regular',
-                fontSize: 20,
-              }}>
-              Apagar
-            </Text>
-
-            
+        <Text
+          style={{
+            color: 'white',
+            fontFamily: 'AveriaLibre-Regular',
+            fontSize: 20,
+          }}
+        >
+          Apagar
+        </Text>
         <View style={[globalStyles.button2]}>
           <TouchableOpacity
             style={{
               display: 'flex',
               alignItems: 'center',
             }}
-            onPress={() => setModalVisible(true)}>
+            onPress={() => setModalVisible(true)}
+          >
             <Icon name="delete" size={40} color="white" />
-            
           </TouchableOpacity>
-          
         </View>
       </View>
 
-      <Modal isVisible={isModalVisible} style={globalStyles.modalContent}>
+      <Modal visible={isModalVisible} style={globalStyles.modalContent}>
         <View style={globalStyles.modalView}>
           <Text style={globalStyles.modalText}>
             Tem certeza de apagar essa pesquisa?
           </Text>
           <View style={globalStyles.modalContainer}>
             <TouchableOpacity
-              style={[globalStyles.modalButton, {backgroundColor: '#FF8383'}]}
-              onPress={() => setModalVisible(false)}>
+              style={[globalStyles.modalButton, { backgroundColor: '#FF8383' }]}
+              onPress={() => handleSearchDelete()}
+            >
               <Text style={globalStyles.modalButtonText}>SIM</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[
-                globalStyles.modalButton,{backgroundColor: '#3F92C5'},
-              ]}
-              onPress={() => setModalVisible(false)}>
+              style={[globalStyles.modalButton, { backgroundColor: '#3F92C5' }]}
+              onPress={() => setModalVisible(false)}
+            >
               <Text style={globalStyles.modalButtonText}>CANCELAR</Text>
             </TouchableOpacity>
           </View>
