@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
-
+import { sendPasswordResetEmail } from 'firebase/auth';
+import auth_mod from '../auth/firebase';
 
 const RecuperarSenha = (props) => {
   const [email, setEmail] = useState('');
@@ -15,12 +16,11 @@ const RecuperarSenha = (props) => {
   };
 
   const handleRecoverPassword = (text) => {
-    setSucessoMessage('');setErrorMessage('');
-    if(validarEmail(text)) {
-      setSucessoMessage('Email enviado com sucesso!')
-    } else {
+    sendPasswordResetEmail(auth_mod, text).then(() => {
+      setSucessoMessage('Email enviado com sucesso!');
+    }).catch(error => { 
       setErrorMessage('E-mail parece ser inválido');
-    }
+    });
   };
 
   return (

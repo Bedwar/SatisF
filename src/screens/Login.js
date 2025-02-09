@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
-import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
+import auth_mod from '../auth/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -29,12 +30,11 @@ const Login = (props) => {
   };
 
   const showHome = (email, password) => {
-    if (validarEmail(email) && password !== '') {
-      setErrorMessage('');
+    signInWithEmailAndPassword(auth_mod, email, password).then(user => {
       props.navigation.navigate('Drawer', { email: email });
-    } else {
-     handleError();
-    }
+    }).catch(error => {
+      handleError();
+    });
   };
 
   return (
