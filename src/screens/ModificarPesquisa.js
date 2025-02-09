@@ -3,6 +3,12 @@ import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-na
 import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
+import { format } from 'date-fns';
+import DatePicker from 'react-native-date-picker';
+import { Modal } from 'react-native-paper';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { initializeFirestore, collection, updateDoc, doc } from 'firebase/firestore';
+import { app } from '../auth/firebase';
 
 
 const parseDate = (dateString) => {
@@ -22,6 +28,9 @@ const ModificarPesquisa = (props) => {
   const [sucessoMessage, setSucessoMessage] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState(research.image || null);
+
+  const db = initializeFirestore(app, {experimentalForceLongPolling: true});
+  
 
   const handleModificarPesquisa = (nome, data) => {
     setErrorNome('');
@@ -74,23 +83,23 @@ const ModificarPesquisa = (props) => {
   };
 
   return (
-    <View style={changeSearchStyles.container}>
-      <View style={changeSearchStyles.header}>
+    <View style={globalStyles.container}>
+      <View style={globalStyles.header}>
         <TouchableOpacity onPress={() => props.navigation.pop()}>
           <Icon
             name="arrow-back"
             size={30}
-            style={changeSearchStyles.headerImg}
+            style={globalStyles.headerImg}
           />
         </TouchableOpacity>
-        <Text style={changeSearchStyles.title}>Modificar pesquisa</Text>
+        <Text style={globalStyles.title}>Modificar pesquisa</Text>
       </View>
 
-      <View style={changeSearchStyles.content}>
-        <View style={changeSearchStyles.inputWrapper}>
-          <Text style={changeSearchStyles.label}>Nome</Text>
+      <View style={globalStyles.content}>
+        <View style={globalStyles.inputWrapper}>
+          <Text style={globalStyles.label}>Nome</Text>
           <TextInput
-            // style={changeSearchStyles.input}
+            // style={globalStyles.input}
             placeholder="Preencha o nome da pesquisa"
             value={nomePesquisa}
             onChangeText={setNomePesquisa}
@@ -100,8 +109,8 @@ const ModificarPesquisa = (props) => {
           ) : null}
         </View>
 
-        <View style={changeSearchStyles.inputWrapper}>
-          <Text style={changeSearchStyles.label}>Data</Text>
+        <View style={globalStyles.inputWrapper}>
+          <Text style={globalStyles.label}>Data</Text>
           <TextInput
             value={format(date, 'dd/MM/yyyy')}
             right={
@@ -109,7 +118,7 @@ const ModificarPesquisa = (props) => {
                 icon="calendar-month"
                 size={35}
                 color={'#00000077'}
-                style={changeSearchStyles.dateIcon}
+                style={globalStyles.dateIcon}
                 onPress={() => setOpen(true)}
               />
             }
@@ -135,15 +144,15 @@ const ModificarPesquisa = (props) => {
           ) : null}
         </View>
 
-        <View style={changeSearchStyles.inputWrapper}>
-          <Text style={changeSearchStyles.label}>Imagem</Text>
+        <View style={globalStyles.inputWrapper}>
+          <Text style={globalStyles.label}>Imagem</Text>
           <TouchableOpacity
-            style={changeSearchStyles.imageTouchable}
+            style={globalStyles.imageTouchable}
             onPress={handleImagePicker}>
             {image ? (
-              <Image source={image} style={changeSearchStyles.pickedImage} />
+              <Image source={image} style={globalStyles.pickedImage} />
             ) : (
-              <Text style={changeSearchStyles.imageButtonText}>
+              <Text style={globalStyles.imageButtonText}>
                 Câmera/Galeria de imagens
               </Text>
             )}
@@ -155,7 +164,7 @@ const ModificarPesquisa = (props) => {
         </View>
       </View>
 
-      <View style={[changeSearchStyles.btnContainer]}>
+      <View style={[globalStyles.btnContainer]}>
         
             <TouchableOpacity style={globalStyles.button} onPress={() =>
               handleModificarPesquisa(nomePesquisa, format(date, 'dd/MM/yyyy'))
@@ -173,7 +182,7 @@ const ModificarPesquisa = (props) => {
             </Text>
 
             
-        <View style={[changeSearchStyles.button2]}>
+        <View style={[globalStyles.button2]}>
           <TouchableOpacity
             style={{
               display: 'flex',
@@ -187,23 +196,23 @@ const ModificarPesquisa = (props) => {
         </View>
       </View>
 
-      <Modal isVisible={isModalVisible} style={changeSearchStyles.modalContent}>
-        <View style={changeSearchStyles.modalView}>
-          <Text style={changeSearchStyles.modalText}>
+      <Modal isVisible={isModalVisible} style={globalStyles.modalContent}>
+        <View style={globalStyles.modalView}>
+          <Text style={globalStyles.modalText}>
             Tem certeza de apagar essa pesquisa?
           </Text>
-          <View style={changeSearchStyles.modalContainer}>
+          <View style={globalStyles.modalContainer}>
             <TouchableOpacity
-              style={[changeSearchStyles.modalButton, {backgroundColor: '#FF8383'}]}
+              style={[globalStyles.modalButton, {backgroundColor: '#FF8383'}]}
               onPress={() => setModalVisible(false)}>
-              <Text style={changeSearchStyles.modalButtonText}>SIM</Text>
+              <Text style={globalStyles.modalButtonText}>SIM</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
-                changeSearchStyles.modalButton,{backgroundColor: '#3F92C5'},
+                globalStyles.modalButton,{backgroundColor: '#3F92C5'},
               ]}
               onPress={() => setModalVisible(false)}>
-              <Text style={changeSearchStyles.modalButtonText}>CANCELAR</Text>
+              <Text style={globalStyles.modalButtonText}>CANCELAR</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -20,7 +20,7 @@ const Home = (props) => {
     const unsubscribe = onSnapshot(q, querySnapshot => {
       const items = [];
       querySnapshot.forEach(doc => {
-        items.push(doc.data());
+        items.push({ id: doc.id, ...doc.data() });
       });
       setResearchData(items);
     });
