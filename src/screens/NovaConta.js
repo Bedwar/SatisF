@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import auth_mod from '../auth/firebase';
 
 import globalStyles from '../styles/globalStyles';
 
@@ -24,7 +26,16 @@ const NovaConta = props => {
     setSucessoMessage('');
     if (validarEmail(email)) {
       if (validarSenha(senha, repeteSenha)) {
-        setSucessoMessage('Cadastrado com sucesso!');
+        //Firebase user creation
+        createUserWithEmailAndPassword(auth_mod, email, senha).then(user => {
+          setSucessoMessage('Usuário cadastrado com sucesso!');
+          setEmail('');
+          setPassword('');
+          setRepeatPassword('');
+        }).catch(error => {
+          setErrorMessage('Erro ao cadastrar usuário');
+        });
+
       } else {
         setErrorMessage('Senha não compatíveis');
       }

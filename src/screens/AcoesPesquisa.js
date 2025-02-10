@@ -2,13 +2,13 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import globalStyles from '../styles/globalStyles';
 
 
 const AcoesPesquisa = props => {
   const research = props.route.params.research;
   const titulo = research.title;
+  
 
   return (
     <View style={globalStyles.container}>

@@ -7,6 +7,8 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
+import { initializeFirestore, collection, addDoc } from 'firebase/firestore';
+import { app } from '../auth/firebase';
 
 
 export default function NovaPesquisa(props) {
@@ -18,12 +20,28 @@ export default function NovaPesquisa(props) {
   const [sucessoMessage, setSucessoMessage] = useState('');
   const [image, setImage] = useState(null);
 
+  const db = initializeFirestore(app, {experimentalForceLongPolling: true});
+  const searchCollection = collection(db, 'pesquisas');
+
   const handleCadastroPesquisa = (nome, data) => {
     setErrorNome('');
     setErrorData('');
     setSucessoMessage('');
     if (nome !== '' && data !== '') {
-      setSucessoMessage('Nova pesquisa registrada!');
+      addDoc(searchCollection, {
+        title: nome,
+        date: data,
+        image: image,
+      })
+        .then(() => {
+          setSucessoMessage('Pesquisa cadastrada com sucesso');
+          setNomePesquisa('');
+          setDate(new Date());
+          setImage(null);
+        })
+        .catch(error => {
+          console.error('Error adding document: ', error);
+        });
     } else {
       if (nome == '') {
         setErrorNome('Preencha o nome da pesquisa');
