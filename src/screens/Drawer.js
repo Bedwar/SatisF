@@ -3,13 +3,14 @@ import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
 import Home from '../screens/Home';
+import { useSelector } from 'react-redux';
 
 
 const DrawerNavigator = createDrawerNavigator();
 
 const Drawer = (props) => {
 
-  const email = props.route.params.email;
+  const email = useSelector(state => state.email.email);
 
   return (
     <DrawerNavigator.Navigator
@@ -42,7 +43,7 @@ const Drawer = (props) => {
       drawerContent={props => (
         <DrawerContentScrollView {...props}>
           <View style={globalStyles.emailContainer}>
-            <Text style={globalStyles.emailText}>{'usuario@dominio.com'}</Text>
+            <Text style={globalStyles.emailText}>{email}</Text>
           </View>
 
           <View style={globalStyles.separator}></View>

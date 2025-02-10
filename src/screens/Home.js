@@ -7,13 +7,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useEffect, useState } from 'react';
 import { initializeFirestore, collection, query, onSnapshot } from 'firebase/firestore';
 import { app } from '../auth/firebase';
-
+import { useSelector } from 'react-redux';
 
 const Home = (props) => {
-
   const db = initializeFirestore(app, {experimentalForceLongPolling: true});
   const searchCollection = collection(db, 'pesquisas');
   const [researchData, setResearchData] = useState([]);
+
+  const email = useSelector(state => state.email);
 
   useEffect(() => {
     const q = query(searchCollection);

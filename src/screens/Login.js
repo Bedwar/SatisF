@@ -4,6 +4,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
 import auth_mod from '../auth/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setEmail as reduceSetEmail } from '../redux/emailSlice';
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -12,6 +15,8 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const dispatch = useDispatch();
 
   const validarEmail = (email) => {
     return /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
@@ -32,6 +37,7 @@ const Login = (props) => {
   const showHome = (email, password) => {
     signInWithEmailAndPassword(auth_mod, email, password).then(user => {
       props.navigation.navigate('Drawer', { email: email });
+      dispatch(reduceSetEmail(email));
     }).catch(error => {
       handleError();
     });
