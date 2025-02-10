@@ -1,15 +1,15 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID, MEASUREMENT_ID } from "@env";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA5shBL7KAemodeAKXwiOKpdRcSaFwZlRg",
-  authDomain: "mobilesatisfy.firebaseapp.com",
-  projectId: "mobilesatisfy",
-  storageBucket: "mobilesatisfy.firebasestorage.app",
-  messagingSenderId: "830117828836",
-  appId: "1:830117828836:web:7d5456e6d9b944e746f4f1",
-  measurementId: "G-16MBCG3P5Q"
-
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
