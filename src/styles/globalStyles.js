@@ -76,8 +76,7 @@ const globalStyles = StyleSheet.create({
     //backgroundColor:'grey',
     flexDirection: 'row',
     fontSize: 34,
-    justifyContent:'flex-start',
-    alignItems:'flex-start',
+    
     fontFamily: fonts.regular,
     color: colors.text,
   },
