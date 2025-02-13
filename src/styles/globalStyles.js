@@ -38,6 +38,12 @@ const globalStyles = StyleSheet.create({
    // backgroundColor:'green',
     backgroundColor: colors.background,
   },
+  crudContainer: {
+    flex: 1,
+    justifyContent: 'flex-start', // Ensures components stack from the top
+    alignItems: 'stretch',       // Allows children to take full width
+    backgroundColor: colors.background,
+  },
   containerLogin: {
     flex: 1,
     justifyContent:'center',
