@@ -10,6 +10,12 @@ import { app } from '../auth/firebase';
 import { useSelector } from 'react-redux';
 
 const Home = (props) => {
+
+  const researchData2 = [
+    { title: 'SECOMP 2023', date: '10/10/2023', image: require('../../assets/images/secomp-icon.png') },
+    { title: 'UBUNTU 2022', date: '05/06/2022', image: require('../../assets/images/ubuntu-icon.png') },
+    { title: 'MENINAS CPU', date: '01/04/2022', image: require('../../assets/images/meninas-icon.png') }
+];
   const db = initializeFirestore(app, {experimentalForceLongPolling: true});
   const searchCollection = collection(db, 'pesquisas');
   const [researchData, setResearchData] = useState([]);
@@ -55,7 +61,7 @@ const Home = (props) => {
     
       <ScrollView 
         horizontal={true}>
-        {researchData.map((research, index) => {
+        {researchData2.map((research, index) => {
           return (
             <TouchableOpacity  style={globalStyles.researchCard}
               key={index}

@@ -1,5 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+//import { collection, initializeFirestore } from 'firebase/firestore';
+import { Provider } from 'react-redux';
 
 import AcoesPesquisa from './src/screens/AcoesPesquisa';
 import Agradecimento from './src/screens/Agradecimento';
@@ -12,14 +14,15 @@ import NovaConta from './src/screens/NovaConta';
 import NovaPesquisa from './src/screens/NovaPesquisa';
 import RecuperarSenha from './src/screens/RecuperarSenha';
 import Relatorio from './src/screens/Relatorio';
-import { Provider } from 'react-redux';
 import store from './src/redux/store';
+//import app  from './src/auth/firebase';
 
 const Stack = createStackNavigator();
 
 const App = () => {
 
-
+//const db = initializeFirestore(app,{experimentalForceLongPolling: true})
+//const usuarios = collection(db,"usuarios")
   return (
     <Provider store={store}>
       <NavigationContainer>
