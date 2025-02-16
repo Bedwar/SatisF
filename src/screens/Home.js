@@ -1,6 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View, Image } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { ScrollView, Text, TouchableOpacity, View, Image ,TextInput } from 'react-native';
 import CardPesquisa from '../componentes/CardPesquisa';
 import globalStyles from '../styles/globalStyles';
 import Icon from 'react-native-vector-icons/MaterialIcons';

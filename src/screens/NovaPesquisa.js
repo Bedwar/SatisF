@@ -1,10 +1,9 @@
 
 import { format } from 'date-fns';
 import React, { useState } from 'react';
-import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Text, TouchableOpacity, View ,TextInput} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
 import { initializeFirestore, collection, addDoc } from 'firebase/firestore';
@@ -83,7 +82,12 @@ export default function NovaPesquisa(props) {
  
 
   return (
+
+
     <View style={globalStyles.container}>
+
+
+
       <View style={globalStyles.header}>
         <TouchableOpacity onPress={() => props.navigation.pop()}>
           <Icon name="arrow-back" size={30} style={globalStyles.headerImg} />
@@ -92,10 +96,11 @@ export default function NovaPesquisa(props) {
       </View>
 
       <View style={globalStyles.area}>
-        <View style={globalStyles.inputWrapper}>
+
+        
           <Text style={globalStyles.label}>Nome</Text>
           <TextInput
-            style={globalStyles.input}
+            style={globalStyles.inputs}
             placeholder="Preencha o nome da pesquisa"
             value={nomePesquisa}
             onChangeText={setNomePesquisa}
@@ -103,17 +108,17 @@ export default function NovaPesquisa(props) {
           {errorNome ? (
             <Text style={globalStyles.errorText}>{errorNome}</Text>
           ) : null}
-        </View>
-
-        <View style={globalStyles.inputWrapper}>
+        
+        
           <Text style={globalStyles.label}>Data</Text>
           <TextInput
+          style={globalStyles.inputs}
             value={format(date, 'dd/MM/yyyy')}
             inlineImageLeft="calendar-month"
             right={
               <TextInput.Icon
                 icon="calendar-month"
-                size={35}
+                size={30}
                 color={'#00000077'}
                 style={globalStyles.dateIcon}
                 onPress={() => setOpen(true)}
@@ -140,9 +145,12 @@ export default function NovaPesquisa(props) {
           {errorData ? (
             <Text style={globalStyles.errorText}>{errorData}</Text>
           ) : null}
-        </View>
+       
+    </View>
 
-        <View style={globalStyles.inputWrapper}>
+
+
+        <View style={globalStyles.areaButtons}>
           <Text style={globalStyles.label}>Imagem</Text>
           <TouchableOpacity
             style={globalStyles.imageTouchable}
@@ -163,7 +171,7 @@ export default function NovaPesquisa(props) {
             <Text style={globalStyles.sucessoMessage}>{sucessoMessage}</Text>
           ) : null}
         </View>
-      </View>
+      
 
       <View style={globalStyles.areaButtons}>
         <TouchableOpacity
@@ -175,5 +183,6 @@ export default function NovaPesquisa(props) {
         </TouchableOpacity>
       </View>
     </View>
+  
   );
 }
