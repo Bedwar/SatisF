@@ -12,13 +12,15 @@ const Relatorio = (props) => {
 
         <View style={globalStyles.header}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
-                <Icon name="arrow-back" size={30} color="white" />
+                <Icon name="arrow-back" size={30} style={globalStyles.headerImg} />
             </TouchableOpacity>
-            <Text style={globalStyles.title}>Relatório</Text>
+            <Text style={globalStyles.header}>Relatório</Text>
         </View>
-        <View style={globalStyles.image}>
-      <Image source={require('../../assets/images/chart.png')} 
-      />
+
+
+        <View style={globalStyles.area}>
+             <Image size={80} source={require('../../assets/images/chart.png')} 
+       />
       </View>
   
        

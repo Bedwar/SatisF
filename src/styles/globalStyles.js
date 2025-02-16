@@ -93,6 +93,13 @@ content:{
     backgroundColor: colors.darkerBackground,
 
   },
+  contentColeta:{
+  marginTop:100,  
+  alignItems:'center',
+
+      margin:4,
+  
+    },
 
   headerLogin: {
     //backgroundColor:'grey',

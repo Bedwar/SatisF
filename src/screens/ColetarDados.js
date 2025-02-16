@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View,ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import globalStyles from '../styles/globalStyles';
 
@@ -17,43 +17,48 @@ const Coleta = props => {
   };
 
   return (
-    <View style={globalStyles.container}>
-      <Text style={globalStyles.question}>
+    <ScrollView contentContainerStyle={globalStyles.containerLogin}>
+      
+      
+       
+      <View style={globalStyles.headerLogin }>
+      <Text style={globalStyles.headerLogin}>
         O que você achou do {titulo}?
       </Text>
-      <View style={globalStyles.optionsContainer}>
+      </View>
+      <View style={globalStyles.content2}>
         <TouchableOpacity
-          style={globalStyles.optionButton}
+          style={globalStyles.contentColeta}
           onPress={() => handleOptionSelect('pessimo')}>
           <Icon name="emoticon-cry-outline" size={50} color="red" />
-          <Text style={globalStyles.optionText}>Péssimo</Text>
+          <Text style={globalStyles.AcoesText}>Péssimo</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={globalStyles.optionButton}
+          style={globalStyles.contentColeta}
           onPress={() => handleOptionSelect('ruim')}>
           <Icon name="emoticon-sad-outline" size={50} color="#ff6347" />
-          <Text style={globalStyles.optionText}>Ruim</Text>
+          <Text style={globalStyles.AcoesText}>Ruim</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={globalStyles.optionButton}
+          style={globalStyles.contentColeta}
           onPress={() => handleOptionSelect('neutro')}>
           <Icon name="emoticon-neutral-outline" size={50} color="#ffd700" />
-          <Text style={globalStyles.optionText}>Neutro</Text>
+          <Text style={globalStyles.AcoesText}>Neutro</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={globalStyles.optionButton}
+          style={globalStyles.contentColeta}
           onPress={() => handleOptionSelect('bom')}>
           <Icon name="emoticon-happy-outline" size={50} color="chartreuse" />
-          <Text style={globalStyles.optionText}>Bom</Text>
+          <Text style={globalStyles.AcoesText}>Bom</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={globalStyles.optionButton}
+          style={globalStyles.contentColeta}
           onPress={() => handleOptionSelect('excelente')}>
           <Icon name="emoticon-excited-outline" size={50} color="#32cd32" />
-          <Text style={globalStyles.optionText}>Excelente</Text>
+          <Text style={globalStyles.AcoesText}>Excelente</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

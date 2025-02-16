@@ -10,6 +10,7 @@ const AcoesPesquisa = props => {
   const titulo = research.title;
   
 
+
   return (
     <View style={globalStyles.container}>
       <View style={globalStyles.header}>
@@ -22,6 +23,7 @@ const AcoesPesquisa = props => {
         </TouchableOpacity>
         <Text style={globalStyles.title}>{titulo}</Text>
       </View>
+
 
       <View style={globalStyles.content2}>
         <TouchableOpacity
