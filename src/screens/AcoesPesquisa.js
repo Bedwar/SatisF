@@ -23,30 +23,30 @@ const AcoesPesquisa = props => {
         <Text style={globalStyles.title}>{titulo}</Text>
       </View>
 
-      <View style={globalStyles.content}>
+      <View style={globalStyles.content2}>
         <TouchableOpacity
-          style={globalStyles.button}
+          style={globalStyles.content}
           onPress={() =>
             props.navigation.navigate('ModificarPesquisa', {research: research})
           }>
           <Icon name="edit-document" size={30} color="white" />
-          <Text style={globalStyles.buttonText}>Modificar</Text>
+          <Text style={globalStyles.AcoesText}>Modificar</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={globalStyles.button}
+          style={globalStyles.content}
           onPress={() =>
             props.navigation.navigate('Coleta', {research: research})
           }>
           <Icon name="library-add-check" size={30} color="white" />
-          <Text style={globalStyles.buttonText}>Coletar dados</Text>
+          <Text style={globalStyles.AcoesText}>Coletar dados</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={globalStyles.button}
+          style={globalStyles.content}
           onPress={() => props.navigation.navigate('Relatorio')}>
           <Icon name="donut-large" size={30} color="white" />
-          <Text style={globalStyles.buttonText}>Relatório</Text>
+          <Text style={globalStyles.AcoesText}>Relatório</Text>
         </TouchableOpacity>
       </View>
 

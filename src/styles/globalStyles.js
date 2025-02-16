@@ -76,7 +76,23 @@ const globalStyles = StyleSheet.create({
     width: '100%',
     paddingVertical: 12,
   },
-  
+ 
+  content2:{
+    
+    flexDirection:'row',
+
+  },
+content:{
+  height:120,
+  width:130,
+    borderRadius: 5,
+    justifyContent:'center',
+    alignItems:'center',
+    padding:15,
+    margin:4,
+    backgroundColor: colors.darkerBackground,
+
+  },
 
   headerLogin: {
     //backgroundColor:'grey',
@@ -146,8 +162,6 @@ const globalStyles = StyleSheet.create({
 
   },
 
-
-
   buttonVerde: {
   
     backgroundColor: colors.verde,
@@ -177,6 +191,11 @@ const globalStyles = StyleSheet.create({
   buttonText: {
     color: colors.text,
     fontSize: 20,
+    fontFamily: fonts.regular,
+  },
+  AcoesText: {
+    color: colors.text,
+    fontSize: 16,
     fontFamily: fonts.regular,
   },
 
