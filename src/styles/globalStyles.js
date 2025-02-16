@@ -100,8 +100,32 @@ const globalStyles = StyleSheet.create({
     fontFamily: fonts.regular,
   },
 
+  labelDrawer:{
+    
+    marginTop: 10,
+    marginLeft:5,
+    fontSize: 22,
+    color: colors.text,
+    fontFamily: fonts.regular,
+  },
+  sair: {
+
+    marginTop:650,
+    fontSize: 18,
+    color: colors.text,
+    fontFamily: fonts.regular,
+  },
+  label2: {
+    //marginLeft:20,
+    //marginTop:20,
+    padding:20,
+    fontSize: 16,
+    color: 'grey',
+    fontFamily: fonts.regular,
+  },
+
   inputs: {
-    borderBottomColor: 'black',
+ 
     color: colors.azul,
     backgroundColor: colors.text,
     fontFamily: fonts.regular,
@@ -111,6 +135,17 @@ const globalStyles = StyleSheet.create({
     padding: 15,
     paddingVertical: 0,
   },
+
+  image: {
+    color:'grey',
+    backgroundColor: colors.text,
+    fontFamily: fonts.regular,
+    borderRadius: 1,
+    height: 65,
+    width:'80%',
+
+  },
+
 
 
   buttonVerde: {

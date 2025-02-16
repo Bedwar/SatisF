@@ -1,9 +1,10 @@
 
 import { format } from 'date-fns';
 import React, { useState } from 'react';
-import { Alert, Image, Text, TouchableOpacity, View ,TextInput} from 'react-native';
+import { TextInput } from 'react-native-paper';
+import { Alert, Image, Text, TouchableOpacity, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles/globalStyles';
 import { initializeFirestore, collection, addDoc } from 'firebase/firestore';
@@ -150,10 +151,10 @@ export default function NovaPesquisa(props) {
 
 
 
-        <View style={globalStyles.areaButtons}>
+        <View style={globalStyles.area}>
           <Text style={globalStyles.label}>Imagem</Text>
           <TouchableOpacity
-            style={globalStyles.imageTouchable}
+            style={globalStyles.image}
             onPress={handleImagePicker}>
             {image ? (
               <Image
@@ -161,7 +162,7 @@ export default function NovaPesquisa(props) {
                 style={globalStyles.pickedImage}
               />
             ) : (
-              <Text style={globalStyles.label}>
+              <Text style={globalStyles.label2}>
                 Câmera/Galeria de imagens
               </Text>
             )}

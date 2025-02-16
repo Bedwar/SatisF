@@ -1,8 +1,8 @@
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View, Image ,TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import CardPesquisa from '../componentes/CardPesquisa';
+import { TextInput } from 'react-native-paper';
 import globalStyles from '../styles/globalStyles';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useEffect, useState } from 'react';
 import { initializeFirestore, collection, query, onSnapshot } from 'firebase/firestore';
 import { app } from '../auth/firebase';

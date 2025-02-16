@@ -19,12 +19,10 @@ const Drawer = (props) => {
         headerTintColor: '#fff',
         headerTitle: '',
         drawerLabelStyle: {
-          fontSize: 80,
-          color: 'white',
           fontFamily: 'AveriaLibre-Regular',
         },
         drawerStyle: {
-          backgroundColor: 'darkslateblue',
+          backgroundColor: '#2B1D62',
           width: '70%',
           fontFamily: 'AveriaLibre-Regular',
         },
@@ -42,39 +40,39 @@ const Drawer = (props) => {
       }}
       drawerContent={props => (
         <DrawerContentScrollView {...props}>
-          <View style={globalStyles.emailContainer}>
-            <Text style={globalStyles.emailText}>{email}</Text>
+          <View >
+            <Text style={globalStyles.label}>{email}</Text>
           </View>
 
-          <View style={globalStyles.separator}></View>
+          
 
-          <View style={globalStyles.drawerContainer}>
+          <View >
+         
             <DrawerItem
               icon={({focused, color, size}) => (
                 <Icon
                   name="description"
-                  size={size}
+                  size={35}
                   color={focused ? '#7cc' : '#ccc'}
                 />
               )}
-              labelStyle={globalStyles.label}
+              labelStyle={globalStyles.labelDrawer}
               label="Pesquisas"
               onPress={() => {
                 props.navigation.goBack();
               }}
-              style={{}}
             />
 
             <DrawerItem
-              style={{marginBottom: 50}}
-              icon={({focused, color, size}) => (
+              style={globalStyles.sair}
+              icon={({focused, size}) => (
                 <Icon
                   name="login"
-                  size={size}
+                  size={35}
                   color={focused ? '#7cc' : '#ccc'}
                 />
               )}
-              labelStyle={globalStyles.label}
+              labelStyle={globalStyles.labelDrawer}
               label="Sair"
               onPress={() => {
                 props.navigation.popToTop();

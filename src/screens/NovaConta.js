@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import auth_mod from '../auth/firebase';
