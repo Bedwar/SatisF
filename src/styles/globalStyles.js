@@ -63,7 +63,13 @@ const globalStyles = StyleSheet.create({
      width: '100%',
      padding: spacing.extraLarge,
     },
- 
+    areaButtonsModal: {
+      flexDirection:'row',
+      justifyContent:'center'
+     // backgroundColor:'yellow',
+    
+     },
+  
   header: {
     display: 'flex',
     fontSize: 34,
@@ -139,14 +145,22 @@ content:{
     fontFamily: fonts.regular,
   },
   label2: {
-    //marginLeft:20,
-    //marginTop:20,
+   
     padding:20,
+   // backgroundColor:'green',
     fontSize: 16,
     color: 'grey',
     fontFamily: fonts.regular,
   },
+  modal:{
+    background: 'white',
+    padding: 10,
+    marginLeft:40,
+   
+    width: '80%',
+  },
 
+  
   inputs: {
  
     color: colors.azul,
@@ -158,7 +172,20 @@ content:{
     padding: 15,
     paddingVertical: 0,
   },
+  inputsModal: {
+    
+    fontSize: 20,
+    fontFamily: fonts.regular,
+ 
+ 
 
+  },
+  areaModal: {
+    backgroundColor:'white',
+    borderRadius:10,
+    width: '100%',
+    padding: spacing.large,
+   },
   image: {
     color:'grey',
     backgroundColor: colors.text,
@@ -176,6 +203,15 @@ content:{
     height: 35,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 55,
+  },
+  buttonVermelho: {
+  
+    backgroundColor: 'tomato',
+    borderRadius: 1,
+    height: 35,
+    justifyContent: 'center',
+    marginLeft: 10,
     marginTop: 55,
   },
   buttonAzul: {
@@ -198,6 +234,15 @@ content:{
   buttonText: {
     color: colors.text,
     fontSize: 20,
+    fontFamily: fonts.regular,
+  },
+
+  
+  buttonTextModal: {
+    color: colors.text,
+    fontSize: 15,
+    width:100,
+    marginLeft:10,
     fontFamily: fonts.regular,
   },
   AcoesText: {
